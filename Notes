@@ -1,0 +1,27 @@
+1).  User ->  OrderService
+-User sends Request to Order Service
+-order is created and saved in database
+
+2). User -> PaymentService -> orderService
+-User sends Request to Payment Service(for payment link)
+   Q) How is the payment link created in the Payment Service?
+Payment Service will communicate with the Order Service to get the order details(Amount ect)
+and then create the payment link for that order
+
+3).User -> Payment Link
+-User clicks on the payment link and pays.
+-payment is done and payment status is updated in the Payment Service
+-user gets redirected to the callback URL
+
+4).CallBack -> PaymentService -> OrderService
+Callback URL makes a call to payment service to check the status of the payment
+callback URL is called and payment status is updated in the Order Service
+
+5). PaymentGateway -> PaymentService webhook URL
+Also payment gateway calls payment service which is the webHook URL
+
+
+what are the API's that we need to implememnt in the Payment Service
+1). Create Payment Link
+2). Get Payment Status
+3). Handle WebHookEvent
